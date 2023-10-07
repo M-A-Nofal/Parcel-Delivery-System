@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Sender {
+  id       String   @id @default(cuid())
+  userName     String
+  email    String   @unique
+  password String
+  role     String   @default("sender")
+  orders   Orders[]
+}
+
+model Biker {
+  id       String   @id @default(cuid())
+  userName     String
+  email    String   @unique
+  password String
+  role     String   @default("biker")
+  orders   Orders[]
+}
+
+model Orders {
+  id                String    @id @default(cuid())
+  senderId          String
+  bikerId           String?
+  description       String
+  pickupAddress     String
+  dropoffAddress     String
+  pickupTimestamp   DateTime?
+  deliveryTimestamp DateTime?
+  status            Int
+  sender            Sender    @relation(fields: [senderId], references: [id])
+  biker             Biker?    @relation(fields: [bikerId], references: [id])
+}
+
+
