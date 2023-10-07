@@ -1,7 +1,7 @@
 Parcel Delivery System
 
 How do you get the app up and running : -
-• Clone the app
+• Clone the app git clone https://github.com/M-A-Nofal/Parcel-Delivery-System
 • Open Visual studio code or any software like.
 • Open the project directory and run these commands
 
